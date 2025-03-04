@@ -159,7 +159,9 @@ fun Home(context: Context) {
             confirmButton = {
                 Button(
                     onClick = {
-                        if (titleText.value.isNotBlank() && descriptionText.value.isNotBlank()) {
+                        if (titleText.value.isBlank() || descriptionText.value.isBlank()) {
+                            Toast.makeText(context, "Title and description cannot be empty!", Toast.LENGTH_SHORT).show()
+                        } else {
                             val newNote = Note(titleText.value, descriptionText.value)
                             notes.add(newNote)
                             sharedPrefHelper.saveNotes(notes) // Save after adding
